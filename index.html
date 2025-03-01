@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neural Networks Mind Map</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f8f9fa;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .mindmap {
+      position: relative;
+      width: 1000px;
+      height: 700px;
+      margin: 20px 0;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    .node {
+      position: absolute;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .node:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    /* Colors: Red = Big Picture, Blue = Major Categories, Green = Details */
+    .red {
+      background-color: #ffcccc;
+      border: 2px solid #e60000;
+      color: #990000;
+    }
+    .blue {
+      background-color: #cce5ff;
+      border: 2px solid #0066cc;
+      color: #004080;
+    }
+    .green {
+      background-color: #ccffcc;
+      border: 2px solid #00cc00;
+      color: #006600;
+      font-weight: normal;
+    }
+    /* Info panel styles */
+    #infoPanel {
+      width: 1000px;
+      min-height: 150px;
+      padding: 15px;
+      margin-top: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+    .infoTitle {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+    .infoContent {
+      line-height: 1.5;
+    }
+    line {
+      stroke: #999;
+      stroke-width: 2;
+    }
+    .legend {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+    }
+    .legendItem {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legendBox {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Neural Networks Mind Map</h1>
+    <div class="mindmap" id="mindmap">
+      <!-- SVG for lines -->
+      <svg width="1000" height="700" style="position: absolute; top: 0; left: 0;">
+        <!-- Main branches from center -->
+        <line x1="500" y1="350" x2="150" y2="150" />   <!-- Perceptron branch -->
+        <line x1="500" y1="350" x2="850" y2="150" />   <!-- Feed Forward branch -->
+        <line x1="500" y1="350" x2="500" y2="600" />   <!-- Activation Functions branch -->
+        
+        <!-- Sub-branches for Perceptron -->
+        <line x1="150" y1="150" x2="50" y2="50" />    <!-- Biological Inspiration -->
+        <line x1="150" y1="150" x2="250" y2="50" />    <!-- Perceptron Model -->
+        <line x1="150" y1="150" x2="50" y2="250" />    <!-- Classification -->
+        <line x1="150" y1="150" x2="250" y2="250" />   <!-- Limitations -->
+        
+        <!-- Sub-branches for Feed Forward -->
+        <line x1="850" y1="150" x2="750" y2="50" />    <!-- Layered Structure -->
+        <line x1="850" y1="150" x2="950" y2="50" />    <!-- ReLU Activation -->
+        <line x1="850" y1="150" x2="850" y2="250" />   <!-- Feed Forward Computation -->
+        
+        <!-- Sub-branches for Activation Functions -->
+        <line x1="500" y1="600" x2="350" y2="500" />    <!-- Linear & Binary -->
+        <line x1="500" y1="600" x2="500" y2="500" />    <!-- Sigmoid & Tanh -->
+        <line x1="500" y1="600" x2="650" y2="500" />    <!-- ReLU, Leaky ReLU, Swish -->
+      </svg>
+      
+      <!-- Central Big Picture Node -->
+      <div class="node red" style="width: 180px; top: 320px; left: 410px;" 
+           onclick="showInfo('Neural Networks', '<ul><li><span class=\'highlight\'>Big Picture:</span> Systems inspired by the brain.</li><li>Consist of interconnected neurons.</li><li>Can learn complex functions from data.</li></ul>')">
+        Neural Networks
+      </div>
+      
+      <!-- Blue Major Categories -->
+      <div class="node blue" style="width: 140px; top: 100px; left: 80px;" 
+           onclick="showInfo('Perceptron', '<ul><li>Inspired by biological neurons.</li><li>Basic unit: f(∑ xᵢwᵢ + b).</li><li>Used for binary classification.</li></ul>')">
+        Perceptron
+      </div>
+      <div class="node blue" style="width: 140px; top: 100px; left: 820px;" 
+           onclick="showInfo('Feed Forward', '<ul><li>Data flows from input to output in layers.</li><li>Uses activations (e.g., ReLU) at each neuron.</li><li>Allows multi-layer non-linear mapping.</li></ul>')">
+        Feed Forward
+      </div>
+      <div class="node blue" style="width: 160px; top: 550px; left: 420px;" 
+           onclick="showInfo('Activation Functions', '<ul><li>Introduce non-linearity.</li><li>Types: Linear, Binary, Sigmoid, Tanh, ReLU, Leaky ReLU, Swish.</li><li>Crucial for learning complex patterns.</li></ul>')">
+        Activation Functions
+      </div>
+      
+      <!-- Green Details for Perceptron -->
+      <div class="node green" style="width: 120px; top: 30px; left: 0px;" 
+           onclick="showInfo('Biological Inspiration', '<ul><li>Neurons receive signals via dendrites.</li><li>Signal integration in the soma; output via axon.</li></ul>')">
+        Biological Inspiration
+      </div>
+      <div class="node green" style="width: 120px; top: 30px; left: 160px;" 
+           onclick="showInfo('Perceptron Model', '<ul><li>Model: h = f(∑ xᵢwᵢ + b).</li><li>Example: Binary activation (step function).</li></ul>')">
+        Perceptron Model
+      </div>
+      <div class="node green" style="width: 120px; top: 230px; left: 0px;" 
+           onclick="showInfo('Classification', '<ul><li>Perceptrons can classify data (e.g., apples vs. oranges).</li><li>Weight and bias selection defines the decision boundary.</li></ul>')">
+        Classification
+      </div>
+      <div class="node green" style="width: 120px; top: 230px; left: 160px;" 
+           onclick="showInfo('Limitations & More Neurons', '<ul><li>Binary activation can be too rigid.</li><li>Motivates using smoother functions (e.g., sigmoid) and more neurons for complex tasks.</li></ul>')">
+        Limitations
+      </div>
+      
+      <!-- Green Details for Feed Forward -->
+      <div class="node green" style="width: 130px; top: 30px; left: 720px;" 
+           onclick="showInfo('Layered Structure', '<ul><li>Input, Hidden, and Output layers.</li><li>Each layer transforms the data.</li></ul>')">
+        Layered Structure
+      </div>
+      <div class="node green" style="width: 130px; top: 30px; left: 880px;" 
+           onclick="showInfo('ReLU Activation', '<ul><li>ReLU: f(x)=max(0,x).</li><li>Efficient and non-linear.</li></ul>')">
+        ReLU Activation
+      </div>
+      <div class="node green" style="width: 130px; top: 230px; left: 720px;" 
+           onclick="showInfo('Feed Forward Computation', '<ul><li>Weights multiply inputs.</li><li>Activations computed layer‐by‐layer.</li><li>Example: input (2,3) yields computed outputs.</li></ul>')">
+        Feed Forward Computation
+      </div>
+      
+      <!-- Green Details for Activation Functions -->
+      <div class="node green" style="width: 110px; top: 420px; left: 280px;" 
+           onclick="showInfo('Linear', '<ul><li>Simple but collapses layers.</li><li>Not suitable for complex mappings.</li></ul>')">
+        Linear
+      </div>
+      <div class="node green" style="width: 110px; top: 420px; left: 400px;" 
+           onclick="showInfo('Binary', '<ul><li>Bounded outputs (0 or 1).</li><li>Not differentiable (problematic for backpropagation).</li></ul>')">
+        Binary
+      </div>
+      <div class="node green" style="width: 110px; top: 420px; left: 520px;" 
+           onclick="showInfo('Sigmoid', '<ul><li>f(x)=1/(1+e<sup>-x</sup>).</li><li>Smooth gradient but can suffer from vanishing gradients.</li></ul>')">
+        Sigmoid
+      </div>
+      <div class="node green" style="width: 110px; top: 420px; left: 640px;" 
+           onclick="showInfo('Tanh', '<ul><li>Zero-centered alternative to sigmoid.</li></ul>')">
+        Tanh
+      </div>
+      <div class="node green" style="width: 110px; top: 520px; left: 280px;" 
+           onclick="showInfo('ReLU', '<ul><li>f(x)=max(0,x); computationally efficient.</li><li>May suffer from the dying ReLU problem.</li></ul>')">
+        ReLU
+      </div>
+      <div class="node green" style="width: 110px; top: 520px; left: 400px;" 
+           onclick="showInfo('Leaky ReLU', '<ul><li>f(x)=max(0.1x,x); mitigates dying ReLU.</li><li>Predefined leakage factor.</li></ul>')">
+        Leaky ReLU
+      </div>
+      <div class="node green" style="width: 110px; top: 520px; left: 520px;" 
+           onclick="showInfo('Swish', '<ul><li>f(x)=x/(1+e<sup>-x</sup>); slightly better performance.</li></ul>')">
+        Swish
+      </div>
+    </div>
+    
+    <!-- Information Panel -->
+    <div id="infoPanel">
+      <div class="infoTitle" id="infoTitle">Click on a concept to see details</div>
+      <div class="infoContent" id="infoContent">
+        Select any node in the mind map to display detailed information about that concept.
+      </div>
+    </div>
+    
+    <!-- Legend -->
+    <div class="legend">
+      <div class="legendItem">
+        <div class="legendBox red"></div>
+        <span>Big Picture</span>
+      </div>
+      <div class="legendItem">
+        <div class="legendBox blue"></div>
+        <span>Major Categories</span>
+      </div>
+      <div class="legendItem">
+        <div class="legendBox green"></div>
+        <span>Details</span>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function showInfo(title, content) {
+      document.getElementById("infoPanel").style.display = "block";
+      document.getElementById("infoTitle").textContent = title;
+      document.getElementById("infoContent").innerHTML = content;
+    }
+  </script>
+</body>
+</html>
